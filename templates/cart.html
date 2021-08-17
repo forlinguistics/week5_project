@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+<main class="container">
+    {% if  not is_logged %}
+        <div class="alert alert-warning" role="alert">Чтобы сделать заказ – <a href="/login">войдите</a> или <a
+                href="/register">зарегистрируйтесь</a></div>
+    {% endif %}
+    <h1 class="h3 my-4">Корзина</h1>
+    <div class="col-1"></div>
+    <div class="col-7">
+        <h4 class="mb-3 col-7 mb-5">{{ dish_num }} блюда в корзине</h4>
+        <table class="table">
+            <tbody>
+            {% for dish in cart %}
+                <tr>
+                    <th scope="row">{{ dish.title }}</th>
+                    <td></td>
+                    <td>1</td>
+                    <td>{{ dish.price }}</td>
+                    <td><a class="text-danger" href="/delete/{{ dish.id }}/">Удалить</a></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <hr>
+        <p class="display-4 my-2 ">{{ price }} руб</p>
+    </div>
+    </div>
+
+    <div class="row mt-5">
+
+
+        <div class="col-4">
+            <form method="POST">
+                <h4 class="">Ваши данные</h4>
+                <div class=" md-4 order-md-1">
+                    <div class="mt-3 mb-3">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" class="font-weight-bold form-control" id="name" name="name">
+                    </div>
+                </div>
+                <div class=" md-4 order-md-1">
+                    <div class="mt-3 mb-3">
+                        <label for="name">Адрес</label>
+                        <input type="text" class="font-weight-bold form-control" id="name" name="adress">
+                    </div>
+                </div>
+                <div class=" md-4 order-md-1">
+                    {% if is_logged %}
+                        <div class="mt-3 mb-3">
+                            <label for="name">Телефон</label>
+                            <input type="text" class="font-weight-bold form-control" id="name" name="phone">
+                        </div>
+                    {% endif %}
+
+                </div>
+                {% if is_logged %}
+                    <button type="submit" class=" mt-3 mb-5 btn btn-danger">Оформить заказ</button>
+                {% endif %}
+            </form>
+        </div>
+
+
+    </div>
+</main>
+{% endblock %}
